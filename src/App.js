@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './reset.css';
 import Header from "./component/Header/Header"
 import Footer from "./component/Footer/Footer"
 import Body from "./component/Body/Body"

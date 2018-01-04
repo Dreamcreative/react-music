@@ -1,0 +1,134 @@
+a,
+address,
+b,
+big,
+blockquote,
+body,
+center,
+cite,
+code,
+dd,
+del,
+div,
+dl,
+dt,
+em,
+fieldset,
+font,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+i,
+iframe,
+img,
+ins,
+label,
+legend,
+li,
+ol,
+p,
+pre,
+small,
+span,
+strong,
+u,
+ul,
+var {
+    margin: 0;
+    padding: 0
+}
+
+img {
+    border: 0;
+}
+
+input {
+    border: none;
+    background: #fff;
+}
+
+input {
+    padding: 0px;
+    margin: 0px;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block
+}
+
+h2,
+h3 {
+    font-family: "microsoft yahei";
+    font-weight: 400;
+}
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0
+}
+
+button,
+html input[type=button],
+input[type=submit] {
+    -webkit-apperance: button;
+    cursor: pointer
+}
+
+button[disabled],
+html input[disabled] {
+    cursor: default
+}
+
+ol,
+ul {
+    list-style: none
+}
+
+img {
+    border: 0;
+}
+
+em,
+i,
+u {
+    font-style: normal
+}
+
+body {
+    font-family: "微软雅黑";
+    color: #666;
+    font-size: 12px
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+input,
+button,
+select,
+textarea {
+    outline: none;
+}
