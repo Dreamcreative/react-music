@@ -1,6 +1,7 @@
 import React ,{ Component } from "react"
 import $ from "jquery"
 import List from "./List"
+import Header from "../Header/Header"
 import api from "../../api"
 class Body extends Component{
     constructor(){
@@ -9,7 +10,7 @@ class Body extends Component{
             data:[]
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         this.handleClick()
     }
     handleClick(){
@@ -36,10 +37,13 @@ class Body extends Component{
         })
     }
     render(){
+        const {data} = this.state
         return(
-            <ul className="Bodyul">
-            {
-                this.state.data.map((item ,index )=>{
+            <div className="Body ">
+            <Header />
+            <ul className="Bodyul clearfix">
+            { data.length ===0? <div>正在加载...</div>:
+                data.map((item ,index )=>{
                     return(
                         <li key={index}>
                             <List data={item}/> 
@@ -48,6 +52,7 @@ class Body extends Component{
                 })
             }
             </ul>
+            </div>
             
         )
     }

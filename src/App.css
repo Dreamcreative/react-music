@@ -51,7 +51,7 @@ input::-webkit-input-placeholder{
   line-height: 50px;
   position: fixed;
   width: 100%;
-  bottom: 0;
+  top: 50px;
 }
 a{
   text-decoration: none;
@@ -63,6 +63,12 @@ a{
 }
 .active{
    color: yellow;
+}
+.nav{
+  position: fixed;
+  bottom:0;
+  background-color:#ddd;
+  width:100%; 
 }
 .navUl li{
   float:left;
@@ -78,8 +84,11 @@ a{
   clear:both;
   display: block;
 }
+.Body{
+  margin-top:100px;
+}
 .Bodyul{
-  padding: 50px 10px ;
+  padding: 0 10px ;
   margin:10px 0 ;
 }
 .Bodyul li{
@@ -92,6 +101,7 @@ a{
   background-color:#ddd; 
 }
 .Bodyul li:nth-of-type(n){
+  margin-top:2px ;
   margin-left:1px ;
 }
 .Bodyul li>div >span{
@@ -100,4 +110,40 @@ a{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.findMusic{
+  margin-top:100px;
+}
+.recommandSong{
+  width:100%;
+}
+.recommandSong p{
+  width:80%;
+  float:left;
+}
+.recommandSong .title{
+  color:blue;
+}
+.recommandSong .author{
+  color:pink;
+}
+.findlistsUl li{
+  border:1px solid #ddd;
+ 
+}
+.findlistsUl{
+   padding: 0 20px;
+}
+.recommandSongA{
+  height:auto;
+  width:100%;
+}
+#audio{
+  position: fixed;
+  bottom:50px;
 }

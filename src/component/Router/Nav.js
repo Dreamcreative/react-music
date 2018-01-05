@@ -6,9 +6,9 @@ import user from "../../image/user.png"
 const NavBar =()=>(
     <div className="nav">
         <ul className="navUl clearfix">
-        <li><NavLink exact to="/"> <img  src={find}/></NavLink></li>
-        <li><NavLink to="/Mymusic"><img  src={music}/></NavLink></li>
-        <li><NavLink to="/other"><img  src={user}/> </NavLink></li>
+            <li><NavLink exact to="/" > <img src={music} /> </NavLink></li>
+            <li><NavLink to="/find"><img src={find} /> </NavLink></li>
+            <li><NavLink to="/user"><img src={user}/> </NavLink></li>
         </ul>
     </div>
 )

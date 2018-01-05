@@ -5,30 +5,28 @@ import './reset.css';
 import Header from "./component/Header/Header"
 import Footer from "./component/Footer/Footer"
 import Body from "./component/Body/Body"
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-//           <img src={logo} className="App-logo" alt="logo" />
-//           <h1 className="App-title">Welcome to React</h1>
-//         </header>
-//         <p className="App-intro">
-//          , edit <code>src/App.js</code> and save to reload.
-//         </p>
-//       </div>
-//     );
-//   }
-// }
+import Find from "./component/Body/Find"
+import Search from "./component/Header/Search"
+import MusicList from "./component/detail/Music"
+import { BrowserRouter as Router , Route ,Switch , Redirect} from "react-router-dom"
+import Nav from "./component/Router/Nav"
 class App extends Component{
   render(){
     return (
-      <div>
-        <Header />
-        <Body />
-        <Footer />
-      </div>
+      
+      <Router>
+        <div>
+        
+        <Nav />
+          <Route exact path="/" component={Body} />
+          <Route  path="/find" component={Find} />
+          <Route  path="/user" component={Search} />
+          <Route  path="/musicList" component={MusicList} />
+        </div>
+    
+        </Router >
     )
   }
 }
 export default App;
+
