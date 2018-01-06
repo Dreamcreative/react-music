@@ -1,0 +1,1 @@
+export default "https://bird.ioliu.cn/v1/?url=http://tingapi.ting.baidu.com/"

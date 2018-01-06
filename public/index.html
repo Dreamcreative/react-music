@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <!--解决音乐不能播放的问题 ，因为百度使用http中的referer 头字段来防止盗链  下面这句 让发送出的
+        http包都不含referer 字段
+    -->
+     <meta name="referrer" content="never">
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/

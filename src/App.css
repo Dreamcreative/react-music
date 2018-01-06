@@ -147,3 +147,29 @@ a{
   position: fixed;
   bottom:50px;
 }
+.app-header .title{
+  font-size: 20px;
+  float:left;
+  width:250px;
+  color:#ddd;
+}
+.searchContent{
+  margin: 50px 20px;
+}
+.searchContent li{
+  border:1px solid #ededed;
+}
+.searchInputListLeft{
+  float:left;
+  width:60%;
+}
+.searchInputListRight{
+  float:right;
+  width:30%;
+}
+a.toSearchList{
+  display: block;
+}
+.searchInputList{
+  padding:0 20px;
+}

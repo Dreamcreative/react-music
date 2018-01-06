@@ -2,12 +2,20 @@ import React ,{ Component } from "react"
 import music from  "../../image/music.png"
 import List from  "../../image/list.png"
 import Input from "./Input"
-class Header extends Component {
+import { Link } from 'react-router-dom'
+class Header extends Component { 
+    getInputValue(data ,value){
+        if(this.props.handleSearch){
+            this.props.handleSearch(data ,value)
+        }
+    }
     render(){
         return (
             <div className="app-header">
                 <img  src={music} className="user"/>
-                <Input />
+                <Link to="/search" className="inputDiv">
+                    <Input getInputValue={this.getInputValue.bind(this)}/>
+                </Link>
                 <img src={List} className="list"/>
             </div>
         )

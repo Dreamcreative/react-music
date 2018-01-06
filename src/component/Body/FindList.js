@@ -10,7 +10,8 @@ export default class extends Component{
         }
     }
     componentWillMount(){
-        fetch( `${api.recommandSongList}&song_id=877578&num=35`,
+        const songId = "877578"
+        fetch( `${api.recommandSongList}&song_id=${songId}&num=35`,
         {
             method:"get",
             headers: {"Content-type":"application/x-www-form-urlencoder;charset=UTF-8"},

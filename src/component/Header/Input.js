@@ -1,6 +1,7 @@
 import React ,{ Component} from "react"
-import $ from "jquery"
 import api from "../../api"
+import {Link} from "react-router-dom"
+import InputList from "../Search/InputList"
 class Input extends Component{
     constructor(){
         super()
@@ -8,12 +9,9 @@ class Input extends Component{
             data:[]
         }
     }
-    componentWillMount(){
-
-    }
     handleInputBlur( e ){
-        const value= e.target.value;
-        console.log(value)
+        const [value , searchArr]= [ e.target.value , [] ];
+        
         // $.ajax({
         //     url:`${api}method=baidu.ting.search.catalogSug&query=${value}`,
         //     dataType:'jsonp',
@@ -34,15 +32,19 @@ class Input extends Component{
             this.setState({
                 data
             })
-            console.log(this.state.data)
-    })
-
+            if(this.props.getInputValue){
+                this.props.getInputValue( this.state.data ,value )
+            }
+        })
+        // localStorage.setItem( JSON.stringify(value))
     }
     render(){
         const data= this.state.data;
         return(
-            <div className="inputDiv">
-                <input type="text" placeholder="请输入关键字" onChange={this.handleInputBlur.bind(this)} />
+            <div >
+                <input type="text"  placeholder="请输入关键字" onChange={this.handleInputBlur.bind(this)} 
+                
+                 />
             </div>
         )
     }
