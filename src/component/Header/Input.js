@@ -11,7 +11,6 @@ class Input extends Component{
     }
     handleInputBlur( e ){
         const [value , searchArr]= [ e.target.value , [] ];
-        
         // $.ajax({
         //     url:`${api}method=baidu.ting.search.catalogSug&query=${value}`,
         //     dataType:'jsonp',
@@ -33,17 +32,33 @@ class Input extends Component{
                 data
             })
             if(this.props.getInputValue){
-                this.props.getInputValue( this.state.data ,value )
+                this.props.getInputValue( this.state.data  )
             }
         })
-        // localStorage.setItem( JSON.stringify(value))
+    }
+    handleInputOnblur( e ){
+        let  [value ,searchArr ]= [e.target.value ,[]] ;   
+        value = value.replace(/\s/g,'')
+        if( value ){
+            if( localStorage.searchArr ){
+                searchArr = JSON.parse(localStorage.getItem("searchArr"));
+            }
+            if(searchArr.length >="10" ){searchArr.shift()}
+            if(searchArr.indexOf( value) !=-1){
+                return ;
+            }else{
+                searchArr.push(value)
+            }
+            localStorage.setItem("searchArr",JSON.stringify( searchArr ))
+        }
+        
     }
     render(){
         const data= this.state.data;
         return(
             <div >
-                <input type="text"  placeholder="请输入关键字" onChange={this.handleInputBlur.bind(this)} 
-                
+                <input type="text" placeholder="请输入关键字" onChange={this.handleInputBlur.bind(this)} 
+                    onBlur={ this.handleInputOnblur.bind(this)}
                  />
             </div>
         )

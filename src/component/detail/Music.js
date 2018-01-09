@@ -2,7 +2,8 @@ import React ,{ Component} from "react"
 import Header from "./Header"
 import api from "../../api"
 import cross from "../../cross"
-
+import MusicList from "./MusicList"
+import Duration from "./Duration"
 class Music extends Component{
     constructor(props){
         super(props);
@@ -10,19 +11,10 @@ class Music extends Component{
             song: null
         }
     }
-    // constructor(){
-    //     super()
-    //     this.state={
-    //         url:""
-    //     }
-    // }
     componentDidMount(){
         const songId = this.props.match.params.url;
-        
-
         fetch(`${cross}${api.play}&songid=${songId}`).then(res => {
             res.json().then(data => {
-                console.log(data);
                 this.setState({
                     song: data
                 })
@@ -31,19 +23,19 @@ class Music extends Component{
 
     }
     render(){
-        
         if(this.state.song){
+        // console.log(this.state.song.bitrate.file_duration)
+        console.log(this.state.song)
             const title = this.state.song.songinfo.title
-            
+            const src = this.state.song.bitrate.file_link
             return (
-            <div>
-                <Header title={title}/>
-                <audio id="audio" src={this.state.song.bitrate.file_link} 
-                autoPlay="autoplay "controls="controls" width="100%">
-                你的浏览器不支持
-                </audio>
-                
-            </div>
+                <div>
+                    <Header title={title}/>
+                    <div className="musicControl">
+                        <Duration />
+                        <MusicList />
+                    </div>
+                </div>
             )
         }else{
             return(

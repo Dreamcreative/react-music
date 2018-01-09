@@ -173,3 +173,26 @@ a.toSearchList{
 .searchInputList{
   padding:0 20px;
 }
+.musicControl{
+  position: fixed;
+  bottom:0;
+  width:100%;
+  background-color:#ccc; 
+}
+.MusicListUl li{
+  float:left;
+  background-color:#A32688 ;
+  width: 33.3%;
+  height: 50px;
+  line-height: 72px;
+  text-align: center;
+}
+.musicDuration{
+  box-sizing: border-box;
+  display:inline-block;
+  width:calc(100% - 48px);
+  /*padding: 0 50px;*/
+}
+#musicDuration{
+  padding:0 20px;
+}

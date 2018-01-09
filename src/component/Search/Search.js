@@ -1,7 +1,9 @@
 import React,{Component } from "react"
-import Header from "../Header/Header"
 import InputList from "./InputList"
+import Header from "../Header/Header"
 import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
+import SearchedList from "./searchedList"
 export default class extends Component{
     constructor(){
         super()
@@ -12,34 +14,52 @@ export default class extends Component{
     }
     handleSearch( data ,value ){
         this.setState({
-            data ,
-            value 
+            data 
         })
-        // console.log( data ,value )
+    }
+    handleClickSearched(e){
+        console.log(e.target.innerHTML)
+        this.setState({
+            value: e.target.innerHTML
+        })
     }
     render(){
         const {data , value} = this.state
+        let  searchArr = [] ;
+        if( localStorage.getItem("searchArr")){
+            searchArr = JSON.parse(localStorage.getItem("searchArr"));
+        }
         return (
             <div>
                 <Header handleSearch={this.handleSearch.bind(this)}/>
-                { 
-                    data ===null && value === undefined ?
-                
-                <div>loading...</div>
-                :
                 <ul className="searchContent">
+                { 
+                data == undefined || value=="" 
+                ?
+                <div>
+                    {searchArr.map(( item, index)=>{
+                        return (
+                            <li key={index} onClick={this.handleClickSearched.bind(this)}>                               
+                                <SearchedList searched={item}/>
+                            </li>
+                        )
+                    })}
+                </div>
+                :
+               <div>
                     {data.map((item , index) => {
                         return (
                             <li key={index}>
-                            <Link to="/musicList/:url" className="toSearchList">
-                                <InputList  data={item}/>
+                            <Link to={`/musicList/${item.songid}`} className="toSearchList">
+                                <InputList  data={item} />
                             </Link>
                             </li>
                         )
                     })
                     }
-                </ul> 
+                </div>
                 }
+                </ul> 
                 
             </div>
             )
