@@ -6,16 +6,14 @@ export default class extends Component{
             eCoordinate:this.props.percent
         }
     }
-    changeCurrentTime( e ){
-        e= e||window.e;
-        const el = document.getElementById( e.target.id )
-        // console.log(e.target.id)
-        const eCoordinate = e.screenX;
-        // this.setState({
-        //     eCoordinate
-        // })
-        // console.log( e.clientX ,eCoordinate)
-        console.log( e.refs)
+    handleMouseMove(e){
+        e = e|| window.e;
+        // const target = e.target ;
+        const eScreenX = e.screenX;
+        const Pcurrent = document.getElementsByClassName("Pcurrent")[0];
+        Pcurrent.screenX = eScreenX;
+        // Pcurrent.style.
+        console.log(Pcurrent.offsetLeft, Pcurrent.screenX)
     }
     render(){
         return(
@@ -24,8 +22,10 @@ export default class extends Component{
                 <div className="musicDuration">
                     <div>
                         <p className="Pcurrent" 
+                        onMouseDown={this.handleMouseMove.bind(this)}
                         style={{"width":this.state.eCoordinate}} ></p>
                         <p className="Pduration" id="Pduration"
+                        onMouseDown={this.handleMouseMove.bind(this)}
                         ></p>
                     </div>
                 </div>
