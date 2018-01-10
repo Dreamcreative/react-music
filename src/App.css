@@ -39,7 +39,7 @@
 }
 .inputDiv{
     display:inline-block;
-    width:72%;
+    width:66%;
 }
 input::-webkit-input-placeholder{
   color:#6a6f77;
@@ -150,7 +150,7 @@ a{
 .app-header .title{
   font-size: 20px;
   float:left;
-  width:250px;
+  width:200px;
   color:#ddd;
 }
 .searchContent{
@@ -190,9 +190,43 @@ a.toSearchList{
 .musicDuration{
   box-sizing: border-box;
   display:inline-block;
-  width:calc(100% - 48px);
-  /*padding: 0 50px;*/
+  width:calc(100% - 64px);
+  
 }
 #musicDuration{
+  line-height: 40px;
+  height:40px;
   padding:0 20px;
+  text-align: center;
+}
+.Pduration{
+  height:2px;
+  display: inline-block;
+  width:100%;
+  margin-bottom:4px;
+  background-color: #A32688;
+}
+.Pcurrent{
+  width:100%;
+  background-color: red;
+  height:3px;
+  position: relative;
+  bottom:-21px;
+  /*box-shadow: 1px 1px pink;*/
+}
+.Pcurrent:after{
+  content:"";
+  border: 6px solid yellow;
+  height:0;
+  border-radius: 50%;
+  position: absolute;
+  top:-4px;
+  right:0;
+ 
+}
+.musicDuration >div{
+  width:80%;
+  margin-left:10%;
+  position: relative;
+  line-height: 40px;
 }

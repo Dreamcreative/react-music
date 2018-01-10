@@ -21,7 +21,7 @@ class App extends Component{
           <Route exact path="/" component={Body} />
           <Route  path="/find" component={Find} />
           <Route  path="/user" component={Search} />
-          <Route  path="/musicList/:url" component={MusicList} />
+          <Route  path="/musicList/:songId" component={MusicList} />
           <Route  path="/search" component={Search} />
         </div>
     
