@@ -15,7 +15,7 @@ class App extends Component{
     return (
       
       <Router>
-        <div>
+        <div style={{ "height":"100%"}}>
         
         <Nav />
           <Route exact path="/" component={Body} />

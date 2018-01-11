@@ -3,7 +3,7 @@ import FindList from "./FindList"
 class Find extends Component{
     render(){
         return (
-            <div className="findMusic">
+            <div className="toTop">
                 <FindList />
             </div>
         )

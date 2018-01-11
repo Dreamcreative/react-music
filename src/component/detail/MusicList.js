@@ -13,6 +13,7 @@ export default class extends Component{
     }
     componentDidMount(){
         const audio = document.getElementById("audio")
+        audio.addEventListener('ended', () => { this.setState({ ifPlay : false}) }, false);  
         // console.log(audio.duration ,audio.currentTime)
     }
     componentWillUnmount(){
@@ -29,20 +30,30 @@ export default class extends Component{
         const audio = e.target
         if(this.props.getAudioTime ){
             this.timer = setInterval(()=>{
-            this.props.getAudioTime( audio.currentTime)
+            this.props.getAudioTime( audio.currentTime )
             } ,1000)
-        }
+        }    
+    }
+    handleLrc(){
+        const audio = document.getElementById("audio");
+        const lrc = this.props.lrc
+        // for( let  i  of lrc) {
+        //     // if( this.currentTime > lrc[i][0]){
+        //         console.log( lrc)
+        //     // }
+        // }
     }
     render(){
         return(
             <div>
-
-            <ul className="MusicListUl clearfix">
-                <li><img src={left}/></li>
-                <li onClick={this.handleClickStart.bind(this)}><img src={this.state.ifPlay?stop:start}/></li>
-                <li><img src={right}/></li>
-            </ul>
-                <audio id="audio" autoPlay="true" onPlay={this.getAudioTime.bind(this)}  >
+                <ul className="MusicListUl clearfix">
+                    <li><img src={left}/></li>
+                    <li onClick={this.handleClickStart.bind(this)}><img src={this.state.ifPlay?stop:start}/></li>
+                    <li><img src={right}/></li>
+                </ul>
+                <audio id="audio" autoPlay="true" 
+                onTimeUpdate={this.handleLrc.bind(this)}
+                onPlay={this.getAudioTime.bind(this)}  >
                     <source src={this.props.src} />
                     您的浏览器不支持
                 </audio>

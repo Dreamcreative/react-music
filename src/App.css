@@ -1,4 +1,7 @@
-
+html ,body{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  height:100%;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -190,15 +193,16 @@ a.toSearchList{
 .musicDuration{
   box-sizing: border-box;
   display:inline-block;
-  width:calc(100% - 64px);
+  width:100%;
   
 }
-#musicDuration{
-  line-height: 40px;
+/*#musicDuration{
+  line-height: 43px;
+  vertical-align: center;
   height:40px;
   padding:0 20px;
   text-align: center;
-}
+}*/
 .Pduration{
   height:2px;
   display: inline-block;
@@ -214,19 +218,41 @@ a.toSearchList{
   bottom:-21px;
   /*box-shadow: 1px 1px pink;*/
 }
-.Pcurrent:after{
-  content:"";
-  border: 6px solid yellow;
-  height:0;
+.circle{
+  /*content:"";*/
+  width:10px;
+  height:10px;
   border-radius: 50%;
+  background-color: yellow;
   position: absolute;
-  top:-4px;
+  top:-3px;
   right:0;
  
 }
 .musicDuration >div{
-  width:80%;
-  margin-left:10%;
+  cursor: pointer;
+  width:70%;
+  margin:0 15%;
   position: relative;
   line-height: 40px;
+  display: block;
+}
+.left{
+  float:left;
+}
+.right{
+  float:right;
+}
+.musicDuration>span{
+  margin:13px 2% 0 2%;
+}
+.toTop{
+  padding-top:50px;
+}
+.lrcUl{
+  height:calc( 100% - 150px);
+  overflow: auto ;
+}
+#root{
+  height:100%;
 }

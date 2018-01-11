@@ -1,36 +1,45 @@
 import React ,{ Component } from "react"
 export default class extends Component{
-    constructor(props){
-        super( props)
-        this.state={
-            eCoordinate:this.props.percent
+    // constructor(props){
+    //     super( props)
+    
+    // }
+    handleMouseMove(event){
+        event.stopPropagation()
+        let div = document.getElementById("musicDuration")
+        const target = event.target
+        if(target.id = "musicDuration"  ){
+            const offsetLeft = div.offsetLeft
+            const offsetWidth = target.offsetWidth
+            const clientX = event.clientX
+            let percent 
+            if(clientX-offsetLeft <= offsetWidth){
+                percent = parseFloat((clientX-offsetLeft) /offsetWidth).toFixed(2) *100 
+            }
+            if( this.props.getPercent ){
+                this.props.getPercent( percent)
+            }
         }
-    }
-    handleMouseMove(e){
-        e = e|| window.e;
-        // const target = e.target ;
-        const eScreenX = e.screenX;
-        const Pcurrent = document.getElementsByClassName("Pcurrent")[0];
-        Pcurrent.screenX = eScreenX;
-        // Pcurrent.style.
-        console.log(Pcurrent.offsetLeft, Pcurrent.screenX)
+        
     }
     render(){
+        const { currentTime , duration ,percent }={ ... this.props}
+        const audio = document.getElementById("audio")
+        
         return(
-            <div id="musicDuration" >
-                <span>{this.props.currentTime}</span>
-                <div className="musicDuration">
-                    <div>
-                        <p className="Pcurrent" 
+                <div className="musicDuration" >
+                <span className="left">{currentTime}</span>
+                <span className= "right">{duration}</span>
+                    <div id="musicDuration"
                         onMouseDown={this.handleMouseMove.bind(this)}
-                        style={{"width":this.state.eCoordinate}} ></p>
-                        <p className="Pduration" id="Pduration"
-                        onMouseDown={this.handleMouseMove.bind(this)}
+                    >
+                        <p className="Pcurrent" style={{"width":percent}} >
+                            <span className="circle"></span></p>
+                        <p className="Pduration"
                         ></p>
                     </div>
                 </div>
-                <span>{this.props.duration}</span>
-            </div>
+            
         )
     }
 }
