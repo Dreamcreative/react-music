@@ -250,9 +250,17 @@ a.toSearchList{
   padding-top:50px;
 }
 .lrcUl{
-  height:calc( 100% - 150px);
+  height:calc( 100% - 143px);
   overflow: auto ;
+  background-color: #723CC3 ;
+  color:#72D4C3;
+  font-size:22px;
+  text-align: center;
+  transform: translate3d( 100 ,100,100)
 }
 #root{
   height:100%;
+}
+.lrcActive{
+  color:red;
 }

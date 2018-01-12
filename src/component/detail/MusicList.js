@@ -18,6 +18,7 @@ export default class extends Component{
     }
     componentWillUnmount(){
         clearInterval( this.timer)
+        clearInterval( this.timers)
     }
     handleClickStart(){
         const audio = document.getElementById("audio")
@@ -34,14 +35,15 @@ export default class extends Component{
             } ,1000)
         }    
     }
-    handleLrc(){
-        const audio = document.getElementById("audio");
-        const lrc = this.props.lrc
-        // for( let  i  of lrc) {
-        //     // if( this.currentTime > lrc[i][0]){
-        //         console.log( lrc)
-        //     // }
-        // }
+    handleLrc( e ){
+        const audio = e.target
+        if(this.props.onTimeUpdate){
+            this.timers = setInterval( ()=>{
+
+                this.props.onTimeUpdate( audio.currentTime )
+            },1)
+        }
+        
     }
     render(){
         return(

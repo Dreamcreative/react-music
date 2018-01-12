@@ -15,7 +15,10 @@ class Music extends Component{
             src :null,
             title:null,
             oneMin:60,
-            lrc:[]
+            lrc:[],
+            dataLrc :null ,
+            lrcArrIndex :0 ,
+            lrcTime : [] 
         }
     }
     componentDidMount(){
@@ -31,12 +34,48 @@ class Music extends Component{
         })
         fetch( `${cross}${api.lrc}&songid=${songId}`).then( res => res.json())
         .then( data => {
-            // console.log( this.handleLrc(data.lrcContent) )
-            this.setState({
-                lrc : this.handleLrc(data.lrcContent)
-            })
+            // console.log( data.lrcContent )
+            if( data.lrcContent ){
+                const dataLrc = this.deleteVoid( this.handleLrc(data.lrcContent) ) 
+                const lrc= this.handleLrcToText ( dataLrc , 1 )
+                const lrcTime = this.handleLrcToText( dataLrc ,0 )
+                this.setState({
+                    lrc ,
+                    dataLrc ,
+                    lrcTime
+                })
+            }else{
+                this.setState({
+                    lrc:["没有查询到歌词"]
+                })
+            }
         })
-
+    }
+    deleteVoid( lrcArr ){
+        lrcArr.forEach(( v , i ,self )=>{
+            if( lrcArr[i][1] ===""){
+                lrcArr.splice( i ,1)              
+            }
+        })
+        return lrcArr
+    }
+    handleLrcTime( time ){
+        const { lrc ,lrcTime, lrcArrIndex } ={ ... this.state}
+        let doneTime = parseFloat(time).toFixed(3)
+        if( doneTime> lrcTime[lrcArrIndex]){ 
+            console.log(doneTime , lrcTime[lrcArrIndex])
+            this.setState({
+                lrcArrIndex : lrcArrIndex+1
+            })
+        }
+    }
+    handleLrcToText( lrc ,i ){
+        let lrcs =[];
+        lrc.forEach( ( value ,index,self )=>{
+            let _index = self[index]
+            lrcs.push( _index[i] )
+        })
+        return lrcs
     }
     handleLrc(text){
           var lines = text.split('\n'),
@@ -102,32 +141,34 @@ class Music extends Component{
             percent
         })      
     }
+    onTimeUpdate( time ){ 
+        this.handleLrcTime( time )
+    }
     render(){
         const song = this.state
         if( song.src  ){
-            let [title,src,duration ,oneMin ] = [song.title ,song.src ,song.duration ,song.oneMin ] 
+            let {title,src,duration ,oneMin ,lrcArrIndex } = { ... this.state}
             const [Min ,Sec ,progress] = [parseInt(duration/oneMin),parseInt(duration%oneMin) , ] 
             duration =this.handleTime(Min , Sec)
             return (
                 <div style={{"height":"100%"}}>
                     <Header title={title}/>
                     <ul className="toTop lrcUl">
-                    {
-                        this.state.lrc.map(( item ,index) =>{
-                           return ( 
-                            <li key={index}>
-                                <Lrc  lrc={item}/>
-                            </li>
-                           )
-                        })
-                    }
+                        {   this.state.lrc.map(( item ,index) =>{
+                            return ( 
+                                <li key={index} className={index === lrcArrIndex -1? "lrcActive" : ""  }>
+                                    <Lrc  lrc={item} />
+                                </li>
+                            )
+                            })
+                        }
                     </ul>
                     <div className="musicControl">
                         <Duration currentTime={ this.state.currentTime} 
                         duration={duration} percent={this.state.percent}
                         getPercent= {this.getPercent.bind(this)}
                         />
-                        <MusicList lrc={this.state.lrc}  getAudioTime={this.getAudioTime.bind(this)} src={src}/>
+                        <MusicList lrc={this.state.lrc} onTimeUpdate={this.onTimeUpdate.bind(this)} getAudioTime={this.getAudioTime.bind(this)} src={src}/>
                     </div>
                 </div>
             )
