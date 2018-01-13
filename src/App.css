@@ -13,6 +13,7 @@ html ,body{
   position: fixed;
   top:0;
   width:100%;
+  z-index: 100;
 }
 .app-header img{
   margin:10px;
@@ -250,17 +251,27 @@ a.toSearchList{
   padding-top:50px;
 }
 .lrcUl{
-  height:calc( 100% - 143px);
+  height:calc(100% - 143px);
   overflow: auto ;
-  background-color: #723CC3 ;
+  background-color: rgb(114,60,195) ;
   color:#72D4C3;
   font-size:22px;
   text-align: center;
-  transform: translate3d( 100 ,100,100)
+  margin-top:-100px;
+  position: relative;
+  top:150px;
+  /*-top:80%;*/
+  /*padding-bottom: 80%;*/
+}
+.lrcUl li:nth-child(1){
+  margin-top:50%;
 }
 #root{
   height:100%;
 }
 .lrcActive{
   color:red;
+}
+.lrcActive ~ li{
+  opacity: 0.5;
 }

@@ -2,12 +2,12 @@ import React ,{Component} from "react"
 import api from "../../api"
 import { Link } from 'react-router-dom'
 export default class extends Component{
-    constructor(){
-        super()
-        this.state={
-            data:[]
-        }
-    }
+    // constructor(){
+    //     super()
+    //     this.state={
+    //         data:[]
+    //     }
+    // }
     render(){
         const {data} = this.props
         const songId = data.song_id

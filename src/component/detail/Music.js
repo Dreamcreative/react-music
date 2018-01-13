@@ -18,11 +18,16 @@ class Music extends Component{
             lrc:[],
             dataLrc :null ,
             lrcArrIndex :0 ,
-            lrcTime : [] 
+            lrcTime : [] ,
+            songId :this.props.match.params.songId
         }
     }
     componentDidMount(){
-        const songId = this.props.match.params.songId;
+        const {songId} = {... this.state};
+        this.handleData(songId);
+    }
+    handleData( songId ){
+        
         fetch(`${cross}${api.play}&songid=${songId}`).then(res => {
             res.json().then(data => {
                 this.setState({
@@ -61,9 +66,11 @@ class Music extends Component{
     }
     handleLrcTime( time ){
         const { lrc ,lrcTime, lrcArrIndex } ={ ... this.state}
+        // console.log(lrcArrIndex)
         let doneTime = parseFloat(time).toFixed(3)
         if( doneTime> lrcTime[lrcArrIndex]){ 
-            console.log(doneTime , lrcTime[lrcArrIndex])
+            let lrcUl =document.getElementById("lrcUl");
+            lrcUl.getElementsByTagName("li")[0].style.marginTop = `calc( 50% - 29*${lrcArrIndex}px)`
             this.setState({
                 lrcArrIndex : lrcArrIndex+1
             })
@@ -110,11 +117,21 @@ class Music extends Component{
     }
     getAudioTime(  currentTime){
         currentTime = Math.ceil(currentTime)
-        const oneMin = 60 ;
+        const oneMin = this.state.oneMin ;
         const duration = this.state.duration
         let Min = Math.floor(currentTime/oneMin)%oneMin ;
         let Sec = Math.ceil(currentTime%oneMin) ; 
         let percent = parseFloat(currentTime /duration*100).toFixed(2) +"%"
+        let lrcTime = this.state.lrcTime
+        lrcTime.forEach(( v , i ,self )=>{
+            if(currentTime > self[i-1] && currentTime < self[i+1]){
+                this.handleLrcTime( currentTime )
+                this.setState({
+                    lrcArrIndex : i
+                })
+            }
+            
+        })
         currentTime = this.handleTime( Min ,Sec)
         this.setState({
             currentTime,
@@ -147,13 +164,13 @@ class Music extends Component{
     render(){
         const song = this.state
         if( song.src  ){
-            let {title,src,duration ,oneMin ,lrcArrIndex } = { ... this.state}
+            let {title,src,duration ,oneMin ,lrcArrIndex ,songId} = { ... this.state}
             const [Min ,Sec ,progress] = [parseInt(duration/oneMin),parseInt(duration%oneMin) , ] 
             duration =this.handleTime(Min , Sec)
             return (
                 <div style={{"height":"100%"}}>
                     <Header title={title}/>
-                    <ul className="toTop lrcUl">
+                    <ul className=" lrcUl" id="lrcUl">
                         {   this.state.lrc.map(( item ,index) =>{
                             return ( 
                                 <li key={index} className={index === lrcArrIndex -1? "lrcActive" : ""  }>
@@ -168,7 +185,9 @@ class Music extends Component{
                         duration={duration} percent={this.state.percent}
                         getPercent= {this.getPercent.bind(this)}
                         />
-                        <MusicList lrc={this.state.lrc} onTimeUpdate={this.onTimeUpdate.bind(this)} getAudioTime={this.getAudioTime.bind(this)} src={src}/>
+                        <MusicList lrc={this.state.lrc} 
+                        onTimeUpdate={this.onTimeUpdate.bind(this)} getAudioTime={this.getAudioTime.bind(this)}
+                         src={src} songId={ songId }/>
                     </div>
                 </div>
             )

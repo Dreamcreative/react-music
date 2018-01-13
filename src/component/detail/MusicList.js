@@ -3,17 +3,20 @@ import left from "../../image/left.png"
 import right from "../../image/right.png"
 import stop from "../../image/stop.png"
 import start from "../../image/start.png"
-
+import { Link } from 'react-router-dom'
 export default class extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
-            ifPlay: true
+            ifPlay: true ,
+            songId : this.props.songId
         }
     }
     componentDidMount(){
         const audio = document.getElementById("audio")
-        audio.addEventListener('ended', () => { this.setState({ ifPlay : false}) }, false);  
+        audio.addEventListener('ended', () => {
+             this.setState({ ifPlay : false}) 
+        }, false);  
         // console.log(audio.duration ,audio.currentTime)
     }
     componentWillUnmount(){
@@ -41,17 +44,31 @@ export default class extends Component{
             this.timers = setInterval( ()=>{
 
                 this.props.onTimeUpdate( audio.currentTime )
-            },1)
+            },10)
         }
         
     }
+    handleTochangeMusic(){
+        const songId =this.props.songId
+        const songIdArr  = JSON.parse( localStorage.getItem("songIdArr"))
+        const index = songIdArr.indexOf(songId)
+        console.log(songIdArr[index-1] )
+        this.setState({
+            songId : songIdArr[index-1]
+        })
+    }
     render(){
+    
         return(
             <div>
                 <ul className="MusicListUl clearfix">
-                    <li><img src={left}/></li>
+                   
+                    <li onClick={this.handleTochangeMusic.bind(this)}><img src={left}/></li>
+                   
                     <li onClick={this.handleClickStart.bind(this)}><img src={this.state.ifPlay?stop:start}/></li>
-                    <li><img src={right}/></li>
+                    
+                    <li ><img src={right}/></li>
+                   
                 </ul>
                 <audio id="audio" autoPlay="true" 
                 onTimeUpdate={this.handleLrc.bind(this)}

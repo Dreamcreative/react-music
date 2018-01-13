@@ -18,7 +18,11 @@ export default class extends Component{
         }).then( res=> res.json() )
         .then( data => {
             const songList=data.result.list;
-            console.log(songList)
+            const songIdArr = [];
+            songList.forEach(( v ,i ,self )=>{
+                songIdArr.push( v.song_id )
+            })
+            localStorage.setItem("songIdArr" ,JSON.stringify(songIdArr))
             this.setState({
                 data : songList
             })
@@ -26,7 +30,7 @@ export default class extends Component{
     }
    
     render(){
-        const {data} = this.state
+        const {data} = {... this.state}
         return(
             <div>
                 <ul className="findlistsUl">
