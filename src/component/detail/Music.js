@@ -5,6 +5,8 @@ import cross from "../../cross"
 import MusicList from "./MusicList"
 import Duration from "./Duration"
 import Lrc from "./Lrc"
+import Volume from "./Volume"
+import showFun from "../../showFun"
 class Music extends Component{
     constructor(props){
         super(props);
@@ -19,12 +21,16 @@ class Music extends Component{
             dataLrc :null ,
             lrcArrIndex :0 ,
             lrcTime : [] ,
-            songId :this.props.match.params.songId
+            songId :this.props.match.params.songId,
+            volumeIsShow: false
         }
     }
     componentDidMount(){
-        const {songId} = {... this.state};
+        const {songId ,volumeIsShow} = {... this.state};
         this.handleData(songId);
+    }
+    componentWillUnMount(){
+        clearInterval( this.timer )
     }
     handleData( songId ){
         
@@ -161,6 +167,31 @@ class Music extends Component{
     onTimeUpdate( time ){ 
         this.handleLrcTime( time )
     }
+    showVolume( e ){
+        e = e||window.e
+        e.stopPropagation()
+        const target = e.target
+        ,volumeComponent = document.getElementById("volumeComponent") ;
+        volumeComponent.style.display = this.state.volumeIsShow ? "none" :"block" 
+        // if( !this.state.volumeIsShow  ){
+        //     showFun.debounce( this.handleVolumeHide( !this.state.volumeIsShow ) ,3000 )
+        
+        // }
+        this.setState({
+            volumeIsShow: !this.state.volumeIsShow
+        })
+        
+    }
+    handleVolumeHide( type ){ 
+        if( type ){
+        this.timer = setInterval(()=>{
+            document.getElementById("volumeComponent") .style.display = this.state.volumeIsShow ? "none" :"block" 
+            this.setState({
+                volumeIsShow : !type
+            })
+        } ,3000)
+        }
+    }
     render(){
         const song = this.state
         if( song.src  ){
@@ -170,7 +201,12 @@ class Music extends Component{
             return (
                 <div style={{"height":"100%"}}>
                     <Header title={title}/>
-                    <ul className=" lrcUl" id="lrcUl">
+                    <ul className=" lrcUl" id="lrcUl"
+                    >
+                    <div className="lrcMask"
+                        onClick={this.showVolume.bind(this)}
+                    ></div>
+                    <Volume />
                         {   this.state.lrc.map(( item ,index) =>{
                             return ( 
                                 <li key={index} className={index === lrcArrIndex -1? "lrcActive" : ""  }>

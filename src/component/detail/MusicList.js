@@ -57,13 +57,17 @@ export default class extends Component{
             songId : songIdArr[index-1]
         })
     }
+    handleSetVolume(){
+        const audio = document.getElementById("audio")
+        console.log( audio.volume)
+    }
     render(){
     
         return(
             <div>
                 <ul className="MusicListUl clearfix">
                    
-                    <li onClick={this.handleTochangeMusic.bind(this)}><img src={left}/></li>
+                    <li><img src={left}/></li>
                    
                     <li onClick={this.handleClickStart.bind(this)}><img src={this.state.ifPlay?stop:start}/></li>
                     

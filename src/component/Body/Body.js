@@ -3,6 +3,7 @@ import $ from "jquery"
 import List from "./List"
 import Header from "../Header/Header"
 import api from "../../api"
+import { Link } from "react-router-dom"
 class Body extends Component{
     constructor(){
         super()
@@ -31,9 +32,17 @@ class Body extends Component{
         }).then(res=> res.json())
         .then(res=>{
                 let songList = res.song_list;
+                console.log(songList)
                 this.setState({
                 data:songList
             })
+        })
+
+        //歌手歌曲列表
+        fetch(`${api.songList}&tinguid=1579&limits=6&use_cluster=1&order=2`)
+        .then( res => res.json())
+        .then(res=>{
+            console.log(res)
         })
     }
     render(){
@@ -46,7 +55,9 @@ class Body extends Component{
                 data.map((item ,index )=>{
                     return(
                         <li key={index}>
+                        <Link to={`/find`}>
                             <List data={item}/> 
+                        </Link>
                         </li>
                     )
                 })

@@ -18,7 +18,6 @@ export default class extends Component{
         })
     }
     handleClickSearched(e){
-        console.log(e.target.innerHTML)
         this.setState({
             value: e.target.innerHTML
         })
@@ -34,7 +33,7 @@ export default class extends Component{
                 <Header handleSearch={this.handleSearch.bind(this)}/>
                 <ul className="searchContent">
                 { 
-                data == undefined || value=="" 
+                data == undefined 
                 ?
                 <div>
                     {searchArr.map(( item, index)=>{
