@@ -26,7 +26,7 @@ class Body extends Component{
         //     } 
         // })
         /** h获取列表 */
-        fetch(`${api.getList}&type=1&size=10&offset=0`,{
+        fetch(`${api.getList}&type=2&size=10&offset=0`,{
              method:"get",
            headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" }
         }).then(res=> res.json())
@@ -36,13 +36,6 @@ class Body extends Component{
                 this.setState({
                 data:songList
             })
-        })
-
-        //歌手歌曲列表
-        fetch(`${api.songList}&tinguid=1579&limits=6&use_cluster=1&order=2`)
-        .then( res => res.json())
-        .then(res=>{
-            console.log(res)
         })
     }
     render(){
@@ -55,7 +48,7 @@ class Body extends Component{
                 data.map((item ,index )=>{
                     return(
                         <li key={index}>
-                        <Link to={`/find`}>
+                        <Link to={`/songList/${item.ting_uid}/${item.author}`}>
                             <List data={item}/> 
                         </Link>
                         </li>

@@ -76,6 +76,7 @@ class Music extends Component{
         let doneTime = parseFloat(time).toFixed(3)
         if( doneTime> lrcTime[lrcArrIndex]){ 
             let lrcUl =document.getElementById("lrcUl");
+            lrcUl.style.paddingTop = "29px"
             lrcUl.getElementsByTagName("li")[0].style.marginTop = `calc( 50% - 29*${lrcArrIndex}px)`
             this.setState({
                 lrcArrIndex : lrcArrIndex+1
@@ -209,7 +210,7 @@ class Music extends Component{
                     <Volume />
                         {   this.state.lrc.map(( item ,index) =>{
                             return ( 
-                                <li key={index} className={index === lrcArrIndex -1? "lrcActive" : ""  }>
+                                <li key={index}  className={index === lrcArrIndex -1? "lrcActive" : ""   }>
                                     <Lrc  lrc={item} />
                                 </li>
                             )

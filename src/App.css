@@ -89,31 +89,34 @@ a{
   display: block;
 }
 .Body{
-  margin-top:100px;
+  margin-top:50px;
+}
+.Bodyul >li a {
+  height:100%;
+  width:100%;
+  display: block;
 }
 .Bodyul{
-  padding: 0 10px ;
-  margin:10px 0 ;
+  padding: 20px 10px ;
+
 }
 .Bodyul li{
   float:left;
   width:33%;
 }
-.Bodyul li> div{
+.Bodyul li  div{
   /*width:95px;*/
   text-align: center;
   background-color:#ddd; 
+ 
 }
 .Bodyul li:nth-of-type(n){
   margin-top:2px ;
   margin-left:1px ;
 }
-.Bodyul li>div >span{
-  display: inline-block;
-  width: 90px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.Bodyul li div >span{
+  display: block;
+  /*width: 90px;*/
 }
 .ellipsis{
   overflow: hidden;
@@ -136,14 +139,14 @@ a{
 .recommandSong .author{
   color:pink;
 }
-.findlistsUl li{
+.findlistsUl li ,.singerSongUl li{
   border:1px solid #ddd;
- 
+  
 }
-.findlistsUl{
-   padding: 0 20px;
+.findlistsUl ,.singerSongUl{
+   padding: 10px 20px 80px;
 }
-.recommandSongA{
+.recommandSongA  {
   height:auto;
   width:100%;
 }
@@ -251,6 +254,7 @@ a.toSearchList{
   padding-top:50px;
 }
 .lrcUl{
+  text-align: center;
   height:calc(100% - 143px);
   overflow: auto ;
   background-color: rgb(114,60,195) ;
@@ -259,6 +263,7 @@ a.toSearchList{
   text-align: center;
   margin-top:-100px;
   position: relative;
+  padding:calc(50% + 29px) 10px 0 10px;
   top:150px;
   /*-top:80%;*/
   /*padding-bottom: 80%;*/
@@ -277,6 +282,9 @@ a.toSearchList{
 }
 .lrcActive ~ li{
   opacity: 0.5;
+}
+.lrcli{
+  width:100%;
 }
 .volumeComponent{
   display: none;

@@ -5,7 +5,7 @@ class List extends Component{
         return(
             <div>
                 <img src={this.props.data.pic_small} />
-                <span>{this.props.data.album_title}</span>
+                <span className="ellipsis">{this.props.data.album_title}</span>
             </div>    
         )
     }

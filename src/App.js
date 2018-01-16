@@ -7,6 +7,7 @@ import Footer from "./component/Footer/Footer"
 import Body from "./component/Body/Body"
 import Find from "./component/Body/Find"
 import Search from "./component/Search/Search"
+import SongList from "./component/SingerSong/SongList"
 import MusicList from "./component/detail/Music"
 import { BrowserRouter as Router , Route ,Switch , Redirect} from "react-router-dom"
 import Nav from "./component/Router/Nav"
@@ -23,6 +24,7 @@ class App extends Component{
           <Route  path="/user" component={Search} />
           <Route  path="/musicList/:songId" component={MusicList} />
           <Route  path="/search" component={Search} />
+          <Route  path="/songList/:tinguid/:author" component={SongList} />
         </div>
     
         </Router >

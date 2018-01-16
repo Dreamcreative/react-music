@@ -1,6 +1,8 @@
 import React ,{Component} from "react"
 import api from "../../api"
 import FindLists from "./FindLists"
+import Header from "../detail/Header"
+
 export default class extends Component{
     
     constructor(){
@@ -33,6 +35,7 @@ export default class extends Component{
         const {data} = {... this.state}
         return(
             <div>
+            <Header title={`发现音乐`}/>
                 <ul className="findlistsUl">
                 { data.length ===0  ? <div>正在加载...</div>:
                     data.map(( item ,index)=>{
